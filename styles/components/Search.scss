@@ -1,0 +1,91 @@
+@use '../abstracts/' as *;
+
+.search{
+    width: 600px;
+    height: 60vh;
+    position: relative;
+    &-container{
+        background: rgba(47, 47, 47, 0.356);
+        box-shadow: 0 8px 32px 0 rgba(54, 37, 59, 0.37);
+        backdrop-filter: blur( 4px );
+        -webkit-backdrop-filter: blur( 4px );
+        border-radius: 10px;
+        border: 4px solid rgba(255, 255, 255, 0.205);
+        max-height: 58px;
+        overflow: hidden;
+        align-items: center;
+        &.active{
+            max-height: 100%;
+            align-items: flex-start;
+        }
+    }
+    &-box{
+        width: 100%;
+        height: 50px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-inline: 10px;
+        flex: 1;
+    }
+    .icons{
+        width: 30px;
+        font-size: 1.5rem;
+        color: $white;
+    }
+    &-input{
+        height: 100%;
+        outline: none;
+        border: none;
+        background-color: transparent;
+        flex: 1;
+        font-size: 1rem;
+        font-family: $primary-font;
+        color: $white;
+        &::-webkit-search-cancel-button{
+            display: none;
+        }
+    }
+    &-results{
+        left: 0;
+        min-height: 100px;
+        max-height: calc(60vh - 100px);
+        width: 100%;
+        flex: 1;
+        border-radius: 0 0 10px 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 20px;
+        align-items: flex-start;
+        transform: scaleY(0);
+        position: relative;
+        padding-bottom: 6vh;
+        &.active{
+            transform: scaleY(1);
+        }
+        &-properties{
+            padding: 10px;
+            display: flex;
+            gap: 8px;
+            flex: 1;
+            flex-direction: column;
+            overflow-y: scroll;
+        }
+        &-footer{
+            background: rgba(255, 255, 255, 0.205);
+            box-shadow: 0 8px 32px 0 rgba(49, 49, 49, 0.37);
+            backdrop-filter: blur( 4px );
+            -webkit-backdrop-filter: blur( 4px );
+            border-radius: 0 0 6px 6px;
+            width: 100%;
+            height: 6vh;
+            position: fixed;
+            bottom: 0;
+        }
+    }
+}

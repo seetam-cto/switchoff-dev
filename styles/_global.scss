@@ -1,0 +1,48 @@
+@use './abstracts/' as *;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Grandiflora+One&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &::-webkit-scrollbar{
+        display: none;
+    }
+}
+
+body {
+    font-family: $primary-font !important;
+    line-height: 1.5;
+    background-color: $bg-body;
+    overflow: hidden;
+}
+
+.container{
+    width: 1320px;
+    margin-inline: auto;
+    @media screen and (max-width: 575px) {
+        width: 100%;
+    }
+    @media screen and (min-width: 576px) {
+        width: 540px;
+    }
+    @media screen and (min-width: 768px) {
+        width: 720px;
+    }
+    @media screen and (min-width: 992px) {
+        width: 960px;
+    }
+    @media screen and (min-width: 1200px) {
+        width: 1140px;
+    }
+    @media screen and (min-width: 1400px) {
+        width: 1320px;
+    }
+}

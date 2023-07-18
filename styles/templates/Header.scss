@@ -1,0 +1,50 @@
+@use '../abstracts/' as *;
+
+.header{
+    width: 100vw;
+    height: 10vh;
+    display: flex;
+    padding-top: 2vh;
+    box-sizing: border-box;
+    align-items: center;
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    &-desktop{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    &-logo{
+        font-family: $primary-font;
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        color: $white;
+        font-weight: 600;
+    }
+    &-menu{
+        padding: 8px 25px;
+        border-radius: 30px;
+        background: rgba( 255, 255, 255, 0.15 );
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+        backdrop-filter: blur( 6px );
+        -webkit-backdrop-filter: blur( 6px );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        ul{
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            li{
+                color: $white;
+                font-size: 0.9rem;
+                line-height: 1.5rem;
+                cursor: pointer;
+            }
+        }
+    }
+}

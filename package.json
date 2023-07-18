@@ -1,0 +1,25 @@
+{
+  "name": "switchoff-dev",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.1.4",
+    "antd": "^5.7.0",
+    "axios": "^1.4.0",
+    "eslint": "8.44.0",
+    "eslint-config-next": "13.4.9",
+    "next": "13.4.9",
+    "react": "18.2.0",
+    "react-autocomplete": "^1.8.1",
+    "react-autosuggest": "^10.1.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.10.1",
+    "sass": "^1.63.6"
+  }
+}
