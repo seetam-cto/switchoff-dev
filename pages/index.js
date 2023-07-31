@@ -3,6 +3,19 @@ import Head from 'next/head'
 import Image from 'next/image'
 import herobg from '../assets/images/bg.png'
 import Header from '@/templates/Header'
+import { AnimatePresence } from 'framer-motion'
+import dynamic from 'next/dynamic';
+const DynamicModal = dynamic(() => import('@/templates/Property/PropertyModal'), { ssr: false });
+import { atom, useAtom } from 'jotai'
+
+//global states
+export const propertyModalState = atom({
+  open: false,
+  propertyId: '',
+  hotelId: ''
+})
+
+export const getPropetyModalState = atom((get) => get(propertyModalState))
 
 export default function Home() {
   return (
@@ -15,8 +28,11 @@ export default function Home() {
       </Head>
       <main>
         <img src={herobg.src} className='temp' />
-        <Header />
-        <Hero />
+        <AnimatePresence>
+          <Header />
+          <Hero />
+          <DynamicModal />
+        </AnimatePresence>
       </main>
     </>
   )

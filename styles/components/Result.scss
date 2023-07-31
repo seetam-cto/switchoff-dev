@@ -4,36 +4,172 @@
     &-property{
         &-card{
             width: 100%;
+            min-height: 180px;
             height: auto;
             display: flex;
             gap: 10px;
-            padding: 8px;
+            // padding: 8px;
             background-color: $white;
-            border-radius: 8px;
+            border-radius: 15px;
+            cursor: pointer;
+            position: relative;
+            &:hover{
+                .result-property-card-weather{
+                    opacity: 1;
+                }
+            }
             &-image{
-                width: 160px;
-                flex: 1;
-                max-height: 100px;
+                width: 260px;
+                max-height: 180px;
+                height: 100%;
+                transition: width .3s ease-in-out;
+                &.short{
+                    width: 200px !important;
+                    img{
+                        width: 200px !important;
+                    }
+                }
                 img{
-                    width: 120px;
+                    width: 260px;
                     height: 100%;
                     object-fit: cover;
                     object-position: center;
                     flex: 1;
-                    border-radius: 5px;
+                    border-radius: 15px 0 0 15px;
+                    transition: width .3s ease-in-out;
                 }
             }
             &-content{
+                width: auto;
+                padding-block: 10px;
+                padding-right: 10px;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: space-between;
                 .card{
                     &-title{
-                        font-size: 1rem;
-                        font-weight: 500;
+                        font-size: 1.2rem;
+                        font-weight: 600;
+                        width: calc(100% - 40px);
+                        transition: all .3s ease;
+                        &.short{
+                            font-size: 1rem;
+                        }
                     }
                     &-address{
                         font-size: 0.8rem;
                     }
+                    &-amenities{
+                        margin-top: 10px;
+                        display: flex;
+                        flex-wrap: wrap;
+                        gap: 5px 10px;
+                        &-amenity{
+                            display: flex;
+                            gap: 5px;
+                            align-items: center;
+                            .material-icons{
+                                font-size: 18px;
+                            }
+                            font-size: 12px;
+                            font-weight: 500;
+                        }
+                    }
+                }
+            }
+            &-weather{
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                transition: all .3s ease-in-out;
+                border-radius: 5px;
+                padding: 2px;
+                p{
+                    font-size: .7rem;
+                    text-align: center;
+                    color: $black;
+                }
+            }
+            &-price{
+                font-size: 1rem;
+                font-family: $heading-font;
+                font-weight: 600;
+                width: 100%;
+                text-align: right;
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                span{
+                    font-size: 1.8rem;
+                    line-height: 1.2rem;
                 }
             }
         }
+    }
+}
+
+.map{
+    width: 750px;
+    height: 72vh;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    .mapboxgl-map{
+        width: 750px !important;
+        height: 72vh !important;
+    }
+    .mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib{
+        display: none !important;
+    }
+    .mapboxgl-canvas-container{
+        height: 72vh !important;
+        width: 750px !important;
+    }
+    .mapboxgl-popup-content{
+        padding: 0 !important;
+        border-radius: 10px !important;
+    }
+    .mapboxgl-canvas{
+        outline: none;
+        border-radius: 15px;
+    }
+    &-wrapper{
+        z-index: 1;
+        height: 72vh !important;
+        width: 750px !important;
+    }
+    &-loading{
+        position: absolute;
+        top: 20px;
+        left: 0;
+        right: 0;
+        width: fit-content;
+        margin-inline: auto;
+        z-index: 10;
+        background-color: $white;
+        padding: 5px 15px;
+        font-size: .9rem;
+        font-weight: 600;
+        border-radius: 40px;
+        box-shadow: 0px 5px 10px #00000050;
+    }
+    &-price{
+        font-weight: 500;
+        font-family: $primary-font;
+        background-color: $white;
+        padding: 2px 10px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px #00000040;
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        gap: 5px;
     }
 }

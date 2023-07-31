@@ -9,6 +9,9 @@ const nextConfig = {
       },
     ],
   },
+  env: {
+    mapbox_key: 'pk.eyJ1Ijoic2VldGFtLWRpdmthciIsImEiOiJjbGgyY3QyNGgxY2dlM2VyenFzbzFua3F4In0.hB1jVykXYXRQA8lMnXY8ng'
+  }
 }
 
 module.exports = nextConfig
