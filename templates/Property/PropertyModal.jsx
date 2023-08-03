@@ -292,7 +292,7 @@ const PropertyModal = () => {
                         </div>
                     </div>
                     <div className="property-info-extras">
-                        {hotelData.info?.hotelData?.summary?.amenities?.amenities?.map((amsec, i) => (
+                        {hotelData?.info?.hotelData?.summary?.amenities?.amenities?.map((amsec, i) => (
                             <div className="property-info-extras-amenities">
                                 <h2>{amsec?.header?.text}</h2>
                             </div>
