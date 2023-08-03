@@ -85,11 +85,13 @@
     &-info{
         width: 100%;
         display: flex;
+        flex-direction: column;
         padding: 10px;
         border-radius: 10px;
-        overflow: hidden;
+        overflow-y: scroll;
+        height: 80vh;
         &-data{
-            width: 70%;
+            width: 100%;
             &-gallery{
                 width: 100%;
                 display: grid;
@@ -100,11 +102,11 @@
                     display: none !important;
                 }
                 .cover{
-                    height: 300px;
+                    height: 350px;
                     overflow: hidden;
                     &-image{
                         width: 100%;
-                        height: 300px;
+                        height: 350px;
                         object-fit: cover;
                         object-position: center;
                         border-top-left-radius: 10px;
@@ -124,7 +126,7 @@
                         display: inline;
                         padding: 0;
                         width: calc(50% - 2.5px);
-                        height: calc(147.5px);
+                        height: calc(172px);
                         overflow: hidden;
                         position: relative;
                         &-block{
@@ -157,9 +159,9 @@
             }
             &-content{
                 width: 100%;
-                padding-inline: 10px;
+                padding-inline: 20px 10px;
                 margin-block: 10px;
-                height: calc(80vh - 330px);
+                height: auto;
                 overflow-y: scroll;
                 &::-webkit-scrollbar{
                     background-color: transparent;
@@ -232,73 +234,60 @@
             }
         }
         &-offers{
-            width: 30%;
+            width: 100%;
             height: 100%;
-            padding-inline: 30px 20px;
-            display: flex;
-            flex-direction: column;
+            padding-inline: 20px 20px;
             h2{
                 font-family: $primary-font;
                 padding-bottom: 1rem;
             }
             .offer{
-                height: 85vh;
-                overflow-y: scroll;
-                display: flex;
-                flex-direction: column;
-                gap: 15px;
-                padding-right: 10px;
-                padding-bottom: 11vh;
-                box-sizing: border-box;
-                &::-webkit-scrollbar{
-                    background-color: transparent;
-                    width: 10px;
-                    &-track{
-                        width: 8px;
-                        // background-color: transparent;
-                    }
-                    &-thumb{
-                        background-color: $black;
-                        width: 8px;
-                        border-radius: 10px;
-                    }
+                width: 100%;
+                .sold-out{
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #cd4747;
                 }
                 &-room{
                     width: 100%;
                     background-color: $white;
                     border-radius: 10px;
                     overflow: hidden;
-                    min-height: 250px;
                     position: relative;
                     &-gallery{
-                        height: 250px;
+                        height: 160px;
                         position: relative;
                         &-nav{
                             flex: 1;
-                            position: relative;
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            bottom: 0;
+                            margin-block: auto;
+                            width: 100%;
+                            display: flex;
+                            justify-content: space-between;
+                            align-items: center;
                             &-prev{
                                 color: $white;
-                                position: absolute;
                                 z-index: 4;
                                 font-size: 1.6rem;
-                                left: 10px;
-                                top: 80px;
+                                margin-left: 10px;
                                 cursor: pointer;
                                 text-shadow: 0px 0px 2px #000000;
                             }
                             &-next{
                                 color: $white;
-                                position: absolute;
                                 z-index: 4;
                                 font-size: 1.6rem;
-                                right: 10px;
-                                top: 80px;
+                                margin-right: 10px;
                                 cursor: pointer;
+                                text-shadow: 0px 0px 2px #000000;
                             }
                         }
                         &-image{
                             width: 100%;
-                            height: 350px;
+                            height: 160px;
                             object-fit: cover;
                             object-position: center 10%;
                         }
@@ -318,7 +307,6 @@
                         }
                     }
                     &-content{
-                        position: absolute;
                         z-index: 4;
                         bottom: 10px;
                         padding: 5px;
@@ -327,36 +315,105 @@
                         right: 0;
                         margin-inline: auto;
                         width: calc(100% - 20px);
-                        background: rgba( 255, 255, 255, 0.25 );
-                        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-                        backdrop-filter: blur( 4px );
-                        -webkit-backdrop-filter: blur( 4px );
-                        border-radius: 10px;
-                        border: 1px solid rgba( 255, 255, 255, 0.18 );
+                        &-features{
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            margin-top: 10px;
+                            h3{
+                                font-weight: 600;
+                                font-family: $primary-font;
+                                font-size: .9rem;
+                            }
+                            &-feature{
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                                gap: 10px;
+                                .material-icons{
+                                    width: 20px;
+                                }
+                            }
+                        }
+                        &-km{
+                            font-weight: 400;
+                            font-size: .8rem;
+                            padding: 2px 8px;
+                            background-color: $black;
+                            color: $white;
+                            width: fit-content;
+                            border-radius: 20px;
+                            cursor: pointer;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            .material-icons{
+                                font-weight: 400;
+                                font-size: .8rem;
+                                width: fit-content;
+                            }
+                        }
                         h2{
                             font-family: $primary-font;
                             font-size: 1rem;
-                            color: $white;
+                            color: $black;
                             font-weight: 500;
                             margin: 0;
                             padding: 0;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
                         }
                         &-subprice{
                             display: flex;
                             justify-content: flex-start;
-                            gap: 10px;
+                            gap: 5px;
                             flex-direction: column;
                             &-li{
                                 padding: 3px 10px;
-                                background-color: #FFFFFF80;
-                                width: fit-content;
+                                background-color: #ffffff29;
+                                box-shadow: 0px 3px 8px #33333330;
                                 box-sizing: border-box;
-                                border-radius: 10px;
+                                border-radius: 5px;
                                 margin-bottom: 2px;
                                 cursor: pointer;
+                                &.active{
+                                    border: 2px solid $black;
+                                }
+                                &-price{
+                                    font-size: 1rem;
+                                    font-weight: 700;
+                                    color: #551475;
+                                }
+                                &-content{
+                                    font-size: .8rem;
+                                    font-weight: 400;
+                                    color: #666666;
+                                }
                             }
                         }
                     }
+                    &-packages{
+                        margin-block: 10px;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 5px;
+                    }
+                }
+            }
+        }
+        &-extras{
+            margin-top: 1.5rem;
+            width: calc(100% - 40px);
+            margin-inline: auto;
+            padding: 15px 20px;
+            background-color: $white;
+            border-radius: 10px;
+            &-amenities{
+                h2{
+                    font-size: 1.2rem;
+                    font-family: $primary-font;
+                    font-weight: 600;
                 }
             }
         }

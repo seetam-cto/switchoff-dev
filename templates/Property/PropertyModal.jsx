@@ -1,4 +1,4 @@
-import { Col, Modal, Row, Skeleton, message } from 'antd'
+import { Col, Modal, Popover, Row, Skeleton, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { propertyModalState } from '@/pages'
 import { useAtom } from 'jotai'
@@ -158,6 +158,12 @@ const PropertyModal = () => {
                                     </div>
                                 </div>
                             </div>
+                            {/* <Image.PreviewGroup>
+                                <Image width={1080} height={720} style={{objectFit: 'contain'}} className='thumbs-image-block' src={hotelData?.info?.hotelData?.propertyGallery?.images[1].image.url}
+                                    alt={hotelData?.info?.hotelData?.propertyGallery?.images[1].image.description} />
+                                <Image width={1080} height={720} style={{objectFit: 'contain'}} className='thumbs-image-block' src={hotelData?.info?.hotelData?.propertyGallery?.images[1].image.url}
+                                alt={hotelData?.info?.hotelData?.propertyGallery?.images[1].image.description} />
+                            </Image.PreviewGroup> */}
                         </div>
                         <div className="property-info-data-content">
                             <Row>
@@ -207,53 +213,90 @@ const PropertyModal = () => {
                                 {hotelData?.offers?.errorMessage?.title?.text.replace(' on Hotels.com.', '.')}
                             </p>
                         }
+                        <Swiper
+                            slidesPerView={4}
+                            spaceBetween={20}
+                            modules={[Navigation]}
+                            loop
+                            navigation
+                            >
                         {hotelData?.offers?.units.map((unit) => 
-                            <div className="offer-room" key={unit.id}>
-                                <div className="offer-room-gallery">
-                                    <div className="offer-room-gallery-nav">
-                                        <div className={`offer-room-gallery-nav-prev nav-k${unit.id}`}>
-                                            <BsFillArrowLeftCircleFill />
+                                <SwiperSlide key={unit.id}>
+                                    <div className="offer-room">
+                                        <div className="offer-room-gallery">
+                                            <div className="offer-room-gallery-nav">
+                                                <div className={`offer-room-gallery-nav-prev nav-k${unit.id}`}>
+                                                    <BsFillArrowLeftCircleFill />
+                                                </div>
+                                                <div className={`offer-room-gallery-nav-next nav-k${unit.id}`}>
+                                                    <BsFillArrowRightCircleFill />
+                                                </div>
+                                            </div>
+                                            <Swiper
+                                            slidesPerView={1}
+                                            modules={[Navigation]}
+                                            className='offer-room-gallery-slider'                                    loop
+                                            navigation={{
+                                                nextEl: `.offer-room-gallery-nav-next.nav-k${unit.id}`,
+                                                prevEl: `.offer-room-gallery-nav-prev.nav-k${unit.id}`,
+                                                // disabledClass: 'swiper-button-disabled'
+                                            }}
+                                            >
+                                                {unit?.unitGallery?.gallery.map((gi,i) => 
+                                                    <SwiperSlide key={i}>
+                                                        <img className='offer-room-gallery-image' src={gi.image.url} alt={gi.image.description} />
+                                                    </SwiperSlide>
+                                                )}
+                                            </Swiper>
+                                            <div className="offer-room-gallery-overlay" />
                                         </div>
-                                        <div className={`offer-room-gallery-nav-next nav-k${unit.id}`}>
-                                            <BsFillArrowRightCircleFill />
+                                        <div className="offer-room-content">
+                                            <h2>{unit.header.text}</h2>
+                                            {/* {propertyState.hotelId} */}
+                                            <div className="offer-room-content-features">
+                                                <h3>Room Features</h3>
+                                                {/* {JSON.stringify(unit.features)} */}
+                                                {unit.features.filter((ft) => ft.text != "Collect and Redeem").map((feat, i) => 
+                                                <div key={i} className="offer-room-content-features-feature">
+                                                    { (feat?.icon?.id || feat?.graphic?.token) &&<span className="material-icons">{(feat?.icon?.id || feat?.graphic?.token) && (feat?.icon?.id == "dimension" ? "select_all" : feat?.icon?.id)}</span>}
+                                                    {feat.text}
+                                                </div>
+                                                )}
+                                            </div>
+                                            {/* <p dangerouslySetInnerHTML={{__html: unit.description}} className="offer-room-content-openroom" /> */}
+                                            <div className="offer-room-packages">
+                                            {unit.ratePlans.length > 0 ? unit?.ratePlans?.map((rp,i) => 
+                                                <div className='offer-room-content-subprice' key={i}>
+                                                    {rp.priceDetails?.map((pd,i) => 
+                                                        <div key={`offer-room-${rp.id}-${i}`} className='offer-room-content-subprice-li' onClick={() => {setUrlParams({...urlParams, roomTypeCode: pd.roomTypeId, rateCode: rp.id}); setPrice(`₹${pd.price.total.amount}`);}}>
+                                                            <p className="offer-room-content-subprice-li-price">
+                                                                ₹{parseInt(pd.price.total.amount)}
+                                                            </p>
+                                                            <p className="offer-room-content-subprice-li-content">
+                                                                {rp.amenities.map((rpam) => rpam.description).join(", ")}
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            ) : (
+                                                <p className="sold-out">
+                                                    Sold Out
+                                                </p>
+                                            )}
+                                            </div>
                                         </div>
                                     </div>
-                                    <Swiper
-                                    slidesPerView={1}
-                                    modules={[Navigation]}
-                                    className='offer-room-gallery-slider'                                    loop
-                                    navigation={{
-                                        nextEl: `.offer-room-gallery-nav-next.nav-k${unit.id}`,
-                                        prevEl: `.offer-room-gallery-nav-prev.nav-k${unit.id}`,
-                                        // disabledClass: 'swiper-button-disabled'
-                                    }}
-                                    >
-                                        {unit?.unitGallery?.gallery.map((gi,i) => 
-                                            <SwiperSlide key={i}>
-                                                <img className='offer-room-gallery-image' src={gi.image.url} alt={gi.image.description} />
-                                            </SwiperSlide>
-                                        )}
-                                    </Swiper>
-                                    <div className="offer-room-gallery-overlay" />
-                                </div>
-                                <div className="offer-room-content">
-                                    <h2>{unit.header.text}</h2>
-                                    <p className="offer-room-content-openroom">
-                                        View Room Details
-                                    </p>
-                                    {unit.ratePlans?.map((rp,i) => 
-                                        <div className='offer-room-content-subprice' key={i}>
-                                            {rp.priceDetails?.slice(0,1).map((pd,i) => 
-                                                <span className='offer-room-content-subprice-li' onClick={() => {setUrlParams({...urlParams, roomTypeCode: pd.roomTypeId, rateCode: rp.id}); setPrice(`₹${pd.price.total.amount}`);}}>
-                                                    ₹{pd.price.total.amount}
-                                                </span>
-                                            )}
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        )}
+                                </SwiperSlide>
+                            
+                        )}</Swiper>
                         </div>
+                    </div>
+                    <div className="property-info-extras">
+                        {hotelData.info?.hotelData?.summary?.amenities?.amenities?.map((amsec, i) => (
+                            <div className="property-info-extras-amenities">
+                                <h2>{amsec?.header?.text}</h2>
+                            </div>
+                        ))}
                     </div>
                 </div>
                 <div className="property-container-footer">

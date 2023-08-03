@@ -272,9 +272,9 @@ const Search = () => {
               {resultsPage && <IoIosCloseCircle onClick={() => closeSearchPage()} className='search-close' />}
             </div>
             {resultsPage && <div className={`search-results ${query.length > 2 && resP !== null ? 'active' : ''}`}>
-                  {!mapView && <div className="search-results-filter">
+                  <div className="search-results-filter">
                         
-                  </div>}
+                  </div>
                   <div className={`search-results-properties ${mapView ? 'active' : ''}`}>
                     {properties && properties.map((p, i) =>
                       <SearchResultCard mapv={mapView} key={i} property={p} />
