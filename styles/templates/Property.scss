@@ -437,44 +437,52 @@
             background-color: $white;
             border-radius: 10px;
             h2{
-                font-size: 1.2rem;
+                font-size: 1.5rem;
                 font-family: $primary-font;
                 font-weight: 600;
                 margin-bottom: 10px;
             }
             &.amenities{
-                display: flex;
-                justify-content: space-between;
-                flex-wrap: wrap;
-                gap: 4rem;
+                margin-bottom: 1rem;
             }
             &-amenities{
                 width: 100%;
+                display: grid;
+                grid-template-columns: 25% 75%;
                 margin-bottom: 20px;
+                padding-bottom: 1rem;
+                border-bottom: 1px solid #33333370;
+                &:last-child{
+                    border-bottom: none;
+                }
                 .amenities{
                     &-grid{
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: flex-start;
-                        gap: 10px;
-                        flex-wrap: wrap;
+                        // display: flex;
+                        // justify-content: space-between;
+                        // align-items: flex-start;
+                        // gap: 10px;
+                        // flex-wrap: wrap;
+                        columns: 2 200px;
+                        column-gap: 4rem;
                     }
                     &-item{
-                        width: calc(25% - 4px);
+                        width: auto;
                         display: flex;
+                        break-inside: avoid;
                         gap: 10px;
                         align-items: flex-start;
+                        margin-bottom: 1.5rem;
                         .material-icons{
-                            margin-top: 15px;
+                            margin-top: 6px;
                         }
                         span{
                             font-weight: 600;
-                            font-size: 1rem;
+                            font-size: 1.1rem;
                         }
                         ul{
-                            list-style-type: square;
+                            list-style-type: none;
                             li{
-                                margin-left: 12px;
+                                max-width: 95%;
                             }
                         }
                     }

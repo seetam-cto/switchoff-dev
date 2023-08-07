@@ -307,7 +307,7 @@ const PropertyModal = () => {
                                         <div key={i} className="amenities-item">
                                             <span className="material-icons">{amn.icon.id == "family_friendly" ? 'family_restroom' : amn.icon.id == "lob_activities" ? 'local_activity' : amn.icon.id}</span>
                                             <div>
-                                            <Collapse
+                                            {/* <Collapse
                                             bordered={false}
                                             expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
                                             style={{
@@ -325,7 +325,11 @@ const PropertyModal = () => {
                                                     marginBottom: 0,
                                                 }
                                             }]}
-                                            />
+                                            /> */}
+                                            <span>{amn.header.text}</span>
+                                            <ul>
+                                                {amn.items && amn.items?.map((item,i) => <li>{item.text}</li>)}
+                                            </ul>
                                             </div>
                                         </div>
                                     ))}
