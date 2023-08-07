@@ -1,4 +1,4 @@
-import { Col, Modal, Popover, Row, Skeleton, message } from 'antd'
+import { Col, Collapse, Modal, Popover, Row, Skeleton, message } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { propertyModalState } from '@/pages'
 import { useAtom } from 'jotai'
@@ -10,6 +10,7 @@ import {Navigation} from 'swiper/modules';
 import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from 'react-icons/bs'
 import { BsImages } from 'react-icons/bs'
 import { registerLead } from '@/api/server'
+import { CaretRightOutlined } from '@ant-design/icons'
 
 const PropertyModal = () => {
     const [propertyState, setPropertyState] = useAtom(propertyModalState)
@@ -198,9 +199,6 @@ const PropertyModal = () => {
                                 </Col>
                                 <Col md={8}>
                                     <img className='mapimage' map src={hotelData?.info?.hotelData?.summary?.location?.staticImage?.url} />
-                                    <ul className='whatsaround'>{hotelData?.info?.hotelData?.summary?.location?.whatsAround?.editorial?.content.map((txt) => 
-                                        <li>{txt}</li>
-                                    )}</ul>
                                 </Col>
                             </Row>
                         </div>
@@ -252,7 +250,7 @@ const PropertyModal = () => {
                                         </div>
                                         <div className="offer-room-content">
                                             <h2>{unit.header.text}</h2>
-                                            {/* {propertyState.hotelId} */}
+                                            {propertyState.hotelId}
                                             <div className="offer-room-content-features">
                                                 <h3>Room Features</h3>
                                                 {/* {JSON.stringify(unit.features)} */}
@@ -269,12 +267,21 @@ const PropertyModal = () => {
                                                 <div className='offer-room-content-subprice' key={i}>
                                                     {rp.priceDetails?.map((pd,i) => 
                                                         <div key={`offer-room-${rp.id}-${i}`} className='offer-room-content-subprice-li' onClick={() => {setUrlParams({...urlParams, roomTypeCode: pd.roomTypeId, rateCode: rp.id}); setPrice(`₹${pd.price.total.amount}`);}}>
-                                                            <p className="offer-room-content-subprice-li-price">
-                                                                ₹{parseInt(pd.price.total.amount)}
-                                                            </p>
-                                                            <p className="offer-room-content-subprice-li-content">
-                                                                {rp.amenities.map((rpam) => rpam.description).join(", ")}
-                                                            </p>
+                                                            <Row>
+                                                                <Col span={4}>
+                                                                    <div className={`offer-room-content-select ${urlParams.roomTypeCode == pd.roomTypeId && urlParams.rateCode == rp.id ? 'active' : ''}`}>
+                                                                        <span>&nbsp;</span>
+                                                                    </div>
+                                                                </Col>
+                                                                <Col span={20}>
+                                                                <p className="offer-room-content-subprice-li-price">
+                                                                    ₹{parseInt(pd.price.total.amount)} <span> / (Excluding Taxes)</span>
+                                                                </p>
+                                                                <ul className="offer-room-content-subprice-li-content">
+                                                                    {rp.amenities.map((rpam, i) => <li key={`offer-room-content-subprice-li-content-${pd.roomTypeId}-${i}`}><span className="material-icons">done</span> {rpam.description}</li>)}
+                                                                </ul>
+                                                                </Col>
+                                                            </Row>
                                                         </div>
                                                     )}
                                                 </div>
@@ -291,13 +298,60 @@ const PropertyModal = () => {
                         )}</Swiper>
                         </div>
                     </div>
-                    <div className="property-info-extras">
+                    <div className="property-info-extras amenities">
                         {hotelData?.info?.hotelData?.summary?.amenities?.amenities?.map((amsec, i) => (
                             <div className="property-info-extras-amenities">
                                 <h2>{amsec?.header?.text}</h2>
+                                <div className="amenities-grid">
+                                    {amsec.contents.map((amn, i) => (
+                                        <div key={i} className="amenities-item">
+                                            <span className="material-icons">{amn.icon.id == "family_friendly" ? 'family_restroom' : amn.icon.id == "lob_activities" ? 'local_activity' : amn.icon.id}</span>
+                                            <div>
+                                            <Collapse
+                                            bordered={false}
+                                            expandIcon={({isActive}) => <CaretRightOutlined rotate={isActive ? 90 : 0} />}
+                                            style={{
+                                                background: 'transparent',
+                                                margin: 0
+                                            }}
+                                            items={[{
+                                                key: i,
+                                                label: amn.header.text,
+                                                children: <ul>
+                                                {amn.items && amn.items?.map((item,i) => <li>{item.text}</li>)}
+                                                </ul>,
+                                                style: {
+                                                    border: 'none',
+                                                    marginBottom: 0,
+                                                }
+                                            }]}
+                                            />
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         ))}
                     </div>
+                    <div className="property-info-extras about">
+                        <h2>Whats Around</h2>
+                        <ul className='whatsaround'>{hotelData?.info?.hotelData?.summary?.location?.whatsAround?.editorial?.content.map((txt) => 
+                            <li>{txt}</li>
+                        )}</ul>
+                    </div>
+                    {/* <div className="property-info-extras policies">
+                        <h2>Policies</h2>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.checkinEnd && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.checkinEnd)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.checkinInstructions && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.checkinInstructions)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.checkinMinAge && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.checkinMinAge)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.checkinStart && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.checkinStart)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.checkoutTime && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.checkoutTime)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.childAndBed && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.childAndBed)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.needToKnow && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.needToKnow)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.paymentOptions && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.paymentOptions)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.pets && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.pets)}</div>
+                        <div className="policy">{hotelData?.info?.hotelData?.summary?.policies?.shouldMention && JSON.stringify(hotelData?.info?.hotelData?.summary?.policies?.shouldMention)}</div>
+                    </div> */}
                 </div>
                 <div className="property-container-footer">
                     <div className="property-container-footer-form">

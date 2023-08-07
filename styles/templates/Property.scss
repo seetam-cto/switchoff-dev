@@ -90,6 +90,7 @@
         border-radius: 10px;
         overflow-y: scroll;
         height: 80vh;
+        padding-bottom: 30px;
         &-data{
             width: 100%;
             &-gallery{
@@ -193,15 +194,6 @@
                     object-fit: cover;
                     border-radius: 15px;
                     box-shadow: 0px 5px 15px #00000020;
-                }
-                ul.whatsaround{
-                    margin-top: 20px;
-                    padding-left: 10px;
-                    list-style-type: "⚡";
-                    li{
-                        margin-left: 10px;
-                        text-align: justify;
-                    }
                 }
                 .highlights{
                     margin-top: 20px;
@@ -315,6 +307,26 @@
                         right: 0;
                         margin-inline: auto;
                         width: calc(100% - 20px);
+                        &-select{
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                            border: 2px solid #791459;
+                            margin-top: 8px;
+                            opacity: .6;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            &.active{
+                                opacity: 1;
+                                span{
+                                    width: 14px;
+                                    height: 14px;
+                                    background-color: #791459;
+                                    border-radius: 50%;
+                                }
+                            }
+                        }
                         &-features{
                             display: flex;
                             flex-direction: column;
@@ -372,23 +384,38 @@
                             &-li{
                                 padding: 3px 10px;
                                 background-color: #ffffff29;
-                                box-shadow: 0px 3px 8px #33333330;
+                                // box-shadow: 0px 3px 8px #33333330;
+                                border-top: 1px solid #333333;
                                 box-sizing: border-box;
-                                border-radius: 5px;
                                 margin-bottom: 2px;
                                 cursor: pointer;
                                 &.active{
                                     border: 2px solid $black;
                                 }
                                 &-price{
-                                    font-size: 1rem;
+                                    font-size: 1.3rem;
                                     font-weight: 700;
-                                    color: #551475;
+                                    color: #791459;
+                                    span{
+                                        color: #00000050;
+                                        font-size: .7rem;
+                                        font-weight: 500;
+                                    }
                                 }
                                 &-content{
                                     font-size: .8rem;
                                     font-weight: 400;
                                     color: #666666;
+                                    list-style: none;
+                                    li{
+                                        list-style: none;
+                                        display: flex;
+                                        align-items: center;
+                                        gap: 10px;
+                                        .material-icons{
+                                            font-size: .8rem;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -409,11 +436,60 @@
             padding: 15px 20px;
             background-color: $white;
             border-radius: 10px;
+            h2{
+                font-size: 1.2rem;
+                font-family: $primary-font;
+                font-weight: 600;
+                margin-bottom: 10px;
+            }
+            &.amenities{
+                display: flex;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 4rem;
+            }
             &-amenities{
-                h2{
-                    font-size: 1.2rem;
-                    font-family: $primary-font;
-                    font-weight: 600;
+                width: 100%;
+                margin-bottom: 20px;
+                .amenities{
+                    &-grid{
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: flex-start;
+                        gap: 10px;
+                        flex-wrap: wrap;
+                    }
+                    &-item{
+                        width: calc(25% - 4px);
+                        display: flex;
+                        gap: 10px;
+                        align-items: flex-start;
+                        .material-icons{
+                            margin-top: 15px;
+                        }
+                        span{
+                            font-weight: 600;
+                            font-size: 1rem;
+                        }
+                        ul{
+                            list-style-type: square;
+                            li{
+                                margin-left: 12px;
+                            }
+                        }
+                    }
+                }
+            }
+            &.about{
+                ul.whatsaround{
+                    margin-top: 10px;
+                    padding-left: 10px;
+                    width: 60%;
+                    list-style-type: "⚡";
+                    li{
+                        margin-left: 10px;
+                        text-align: justify;
+                    }
                 }
             }
         }
