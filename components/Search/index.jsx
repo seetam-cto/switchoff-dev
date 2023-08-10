@@ -162,6 +162,17 @@ const Search = () => {
     }
 
     useEffect(() => {
+      setSearchFocus(true)
+      //establish a Websocket connection when the component mounts
+      socketRef.current = new WebSocket("wss://nuura.switchoff.in/ws/suggest");
+      socketRef.current.onopen = () => console.log("WebSocket connected!");
+      socketRef.current.onclose = () => console.log("WebSocket disconnected!");
+      return () => {
+        socketRef && socketRef.current.close()
+      }
+    },[])
+
+    useEffect(() => {
         if(mapView){
           maplistRef.current = new WebSocket("wss://nuura.switchoff.in/ws/maplist")
           maplistRef.current.onopen = () => {setMapListConnected(true); console.log("MapWS Connected!")};
