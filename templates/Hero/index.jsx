@@ -26,7 +26,7 @@ const Hero = () => {
             </div>
             <div className="hero-info">
               <div className='hero-info-sub'>
-                <div className="hero-info-box">
+                {/* <div className="hero-info-box">
                   <div className="icon">
                     <TbRoute />
                   </div>
@@ -43,7 +43,7 @@ const Hero = () => {
                     Provides travelers with more accurate<br />
                     and reliable perspective of the destination.
                   </div>
-                </div>
+                </div> */}
               </div>
               <div className="hero-info-sub">
                 

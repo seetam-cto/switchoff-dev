@@ -4,7 +4,7 @@
     &-property{
         &-card{
             width: 100%;
-            min-height: 180px;
+            min-height: 200px;
             height: auto;
             display: flex;
             gap: 10px;
@@ -19,8 +19,8 @@
                 }
             }
             &-image{
-                width: 260px;
-                max-height: 180px;
+                width: 280px;
+                max-height: 200px;
                 height: 100%;
                 transition: width .3s ease-in-out;
                 &.short{
@@ -30,7 +30,7 @@
                     }
                 }
                 img{
-                    width: 260px;
+                    width: 280px;
                     height: 100%;
                     object-fit: cover;
                     object-position: center;

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react'
 import axios from 'axios'
 import {BiSearchAlt} from 'react-icons/bi'
 import {IoIosCloseCircle} from 'react-icons/io'
-import { AutoComplete, Tag, DatePicker, Select, Divider } from 'antd'
+import { AutoComplete, Tag, DatePicker, Select, Divider, Form, Button } from 'antd'
 import SearchResultCard from '../Results'
 import ReactTypingEffect from 'react-typing-effect'
 import nlp from 'compromise';
@@ -12,8 +12,8 @@ import moment from 'moment'
 const { RangePicker } = DatePicker
 import mapicon from '../../assets/icons/location.png'
 import dayjs from 'dayjs';
-import { motion } from 'framer-motion'
 import Map from './Map'
+import FilterForm, { searchFilters } from './FilterForm'
 
 export const searchParams = atom({
   adults_number: '1',
@@ -53,6 +53,8 @@ const Search = () => {
       // Can not select days before today and today
       return current && current < dayjs().endOf('day');
     };
+
+    const [filters, setFilters] = useAtom(searchFilters)
   
     const fetchReuslts = async(q) => {
       let doc = nlp(q)
@@ -77,6 +79,19 @@ const Search = () => {
         },3000)
       }
     },[message])
+
+    const handleQuiz = async (q) => {
+      setQuery(q)
+      if(q.trim().length > 2){
+        fetchReuslts(q.trim())
+        setResultsPage(true)
+      }else{
+        setResP(null);
+        setProperties([])
+        setResultsPage(false)
+        setMapMarkers([])
+      }
+    }
 
     const handleSubmit = async (e) => {
         if(e !== null){
@@ -273,7 +288,8 @@ const Search = () => {
             </div>
             {resultsPage && <div className={`search-results ${query.length > 2 && resP !== null ? 'active' : ''}`}>
                   <div className="search-results-filter">
-                        
+                        {filters && filters.isFinal ? <h2>Fantastic! Here&lsquo;s a quick summary of your preferences.</h2> : <h2>Let Us Help you with shortlisting your stay</h2>}
+                        {filters.state && <FilterForm submit={handleQuiz} />}
                   </div>
                   <div className={`search-results-properties ${mapView ? 'active' : ''}`}>
                     {properties && properties.map((p, i) =>
@@ -288,7 +304,7 @@ const Search = () => {
                       isText={isTextSearch}
                       setIsText={setIsTextSearch}
                       />
-                      </div>}
+                  </div>}
             </div>}
         </div>
     )

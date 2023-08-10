@@ -34,8 +34,7 @@ const SearchResultCard = ({property, mapv}) => {
         <motion.div
         key={property.id}
         initial={{y: 100, opacity: 0}}
-        animate={{y: 0,opacity: 1}}
-        whileHover={{scale: 0.98}}
+        animate={{y: 0, opacity: 1}}
         onClick={() => handleOpenModal(property.hotelId)}
         className="result-property-card">
             <div className={`result-property-card-image ${mapv ? 'short' : ''}`}>

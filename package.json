@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@ant-design/icons": "^5.1.4",
+    "@ant-design/happy-work-theme": "^1.0.0",
+    "@ant-design/icons": "^5.2.5",
     "antd": "^5.7.0",
     "axios": "^1.4.0",
     "compromise": "^14.9.0",

@@ -82,6 +82,19 @@
             }
         }
     }
+    &-close{
+        background-color: #fffffff6;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 0px;
+        margin-right: 20px;
+        .material-icons{
+            font-size: 1.6rem !important;
+            padding: 5px;
+        }
+    }
     &-info{
         width: 100%;
         display: flex;
@@ -222,6 +235,36 @@
                 .about{
                     margin-top: 20px;
                     width: 95%;
+                }
+                .review{
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 1.3rem;
+                    border: 1px dashed #222222;
+                    border-radius: 4px;
+                    padding: 3px;
+                    width: fit-content;
+                    &-container{
+                        display: flex;
+                        gap: 10px;
+                        p{
+                            width: 300px;
+                        }
+                    }
+                    &-rating{
+                        font-weight: 500;
+                        font-size: .8rem;
+                        display: flex;
+                        flex-direction: column;
+                        width: fit-content;
+                        &-tag{
+                            background-color: var(--rating);
+                            color: $white;
+                            padding: 1px 5px;
+                            border-radius: 4px;
+                        }
+                    }
                 }
             }
         }
@@ -481,9 +524,6 @@
                         }
                         ul{
                             list-style-type: none;
-                            li{
-                                max-width: 95%;
-                            }
                         }
                     }
                 }

@@ -114,6 +114,7 @@ const PropertyModal = () => {
         open={propertyState.open}
         className='property-modal'
         footer={null}
+        closeIcon={<div className='property-close'><span className="material-icons">close</span></div>}
         >
             <div className="property-container">
                 <div className="property-info">
@@ -171,9 +172,11 @@ const PropertyModal = () => {
                                 <Col md={16}>
                                     <div className="property-info-data-content-scroll">
                                         <h1>{hotelData?.info?.hotelData?.summary?.name}</h1>
+                                        <div className="review-container">
+                                        <div className="review">
+                                            {hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value && <span className='review-rating'><span className='review-rating-tag' style={{'--rating': hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value.split("/10")[0] > 7 ? '#0e661a' : '#ffa43c'}}>{hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value.split("/10")[0]}/10</span> {hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value.split("/10")[1]}</span>}
+                                        </div>
                                         <p className="tagline">{hotelData?.info?.hotelData?.summary?.tagline}</p>
-                                        <div className="review-rating">
-                                            {hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value && `Rated ${hotelData?.info?.hotelData?.reviewInfo?.summary?.overallScoreWithDescriptionA11y?.value}`}
                                         </div>
                                         <div className="highlights">
                                             <h2>{hotelData?.info?.hotelData?.summary?.amenities?.topAmenities?.header?.text}</h2>
@@ -250,7 +253,7 @@ const PropertyModal = () => {
                                         </div>
                                         <div className="offer-room-content">
                                             <h2>{unit.header.text}</h2>
-                                            {propertyState.hotelId}
+                                            {/* {propertyState.hotelId} */}
                                             <div className="offer-room-content-features">
                                                 <h3>Room Features</h3>
                                                 {/* {JSON.stringify(unit.features)} */}
@@ -265,7 +268,13 @@ const PropertyModal = () => {
                                             <div className="offer-room-packages">
                                             {unit.ratePlans.length > 0 ? unit?.ratePlans?.map((rp,i) => 
                                                 <div className='offer-room-content-subprice' key={i}>
-                                                    {rp.priceDetails?.map((pd,i) => 
+                                                    {rp.priceDetails.reduce((acc, obj) => {
+                                                        if(!acc.temp[obj.roomTypeId]){
+                                                            acc.result.push(obj)
+                                                            acc.temp[obj.roomTypeId] = true;
+                                                        }
+                                                        return acc;
+                                                    }, {result: [], temp: {}}).result?.map((pd,i) => 
                                                         <div key={`offer-room-${rp.id}-${i}`} className='offer-room-content-subprice-li' onClick={() => {setUrlParams({...urlParams, roomTypeCode: pd.roomTypeId, rateCode: rp.id}); setPrice(`₹${pd.price.total.amount}`);}}>
                                                             <Row>
                                                                 <Col span={4}>
@@ -284,6 +293,7 @@ const PropertyModal = () => {
                                                             </Row>
                                                         </div>
                                                     )}
+                                                    
                                                 </div>
                                             ) : (
                                                 <p className="sold-out">
@@ -294,7 +304,6 @@ const PropertyModal = () => {
                                         </div>
                                     </div>
                                 </SwiperSlide>
-                            
                         )}</Swiper>
                         </div>
                     </div>
