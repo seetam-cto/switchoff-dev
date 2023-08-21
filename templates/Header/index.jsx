@@ -21,7 +21,7 @@ const Header = () => {
                     </div>
                     <div className="header-menu">
                         <ul>
-                            <li>Destinations</li>
+                            <li><a href={'#destinations'}>Destinations</a></li>
                             <li>Features</li>
                             <li>About</li>
                             <li>Blog</li>

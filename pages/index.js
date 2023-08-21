@@ -7,6 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import dynamic from 'next/dynamic';
 const DynamicModal = dynamic(() => import('@/templates/Property/PropertyModal'), { ssr: false });
 import { atom, useAtom } from 'jotai'
+import Destinations from '@/templates/Sections/Destinations'
 
 //global states
 export const propertyModalState = atom({
@@ -27,10 +28,11 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <img src={herobg.src} className='temp' />
+        {/* <img src={herobg.src} className='temp' /> */}
         <AnimatePresence>
           <Header />
           <Hero />
+          <Destinations />
           <DynamicModal />
         </AnimatePresence>
       </main>

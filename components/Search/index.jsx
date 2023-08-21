@@ -14,6 +14,7 @@ import mapicon from '../../assets/icons/location.png'
 import dayjs from 'dayjs';
 import Map from './Map'
 import FilterForm, { searchFilters } from './FilterForm'
+import { motion } from 'framer-motion'
 
 export const searchParams = atom({
   adults_number: '1',
@@ -267,15 +268,27 @@ const Search = () => {
                       <IoIosCloseCircle style={{visibility: query.length > 0 ? 'visible' :'hidden'}} className='icons' onClick={() => {setQuery("")}} />
                   </form>
               </div>
-              {resultsPage && <div className="search-dates">
+              {resultsPage && <motion.div
+              initial={{opacity: 0, y: -50}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0, y: -50}}
+              transition={{delay: .5}}
+              key={'search-dates'}
+              className="search-dates">
                   <RangePicker
                   value={dates}
                   placeholder={['Check In','Check Out']}
                   onChange={(val) => handleDates(val)}
                   disabledDate={disabledDate}
                   clearIcon={false} suffixIcon={null} size='large' className='search-dates-inputs' bordered={false} />
-              </div>}
-              {resultsPage && <div className="search-guests">
+              </motion.div>}
+              {resultsPage && <motion.div
+              initial={{opacity: 0, y: -50}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0, y: -50}}
+              transition={{delay: .5}}
+              key={'search-guests'}
+              className="search-guests">
                 Guests
                 <Select
                 value={searchPs.adults_number}
@@ -291,16 +304,27 @@ const Search = () => {
                 onChange={(value) => setSearchPs({...searchPs, children_ages: value == 0 ? '0' : Array.from({length: parseInt(value)}, () => '4').join(',')})}
                 bordered={false}
                 />
-              </div>}
-              {resultsPage && <div className="search-mapbox" onClick={() => setMapView(!mapView)}>
+              </motion.div>}
+              {resultsPage && <motion.div
+              initial={{opacity: 0, y: -50}}
+              animate={{opacity: 1, y: 0}}
+              exit={{opacity: 0, y: -50}}
+              transition={{delay: .5}}
+              key={'search-mapbox'}
+              className="search-mapbox" onClick={() => setMapView(!mapView)}>
                 <img style={{filter: `saturate(${mapView ? 1.5 : 0.5})`}} src={mapicon.src} alt="" />
-              </div>}
+              </motion.div>}
               {resultsPage && <IoIosCloseCircle onClick={() => closeSearchPage()} className='search-close' />}
             </div>
-            {resultsPage && <div className={`search-results ${query.length > 2 && resP !== null ? 'active' : ''}`}>
+            {resultsPage && <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{delay: .5}}
+            key={'search-results'}
+            className={`search-results ${resP !== null ? 'active' : ''}`}>
                   <div className="search-results-filter">
-                        {filters && filters.isFinal ? <h2>Fantastic! Here&lsquo;s a quick summary of your preferences.</h2> : <h2>Let Us Help you with shortlisting your stay</h2>}
-                        {filters.state && <FilterForm submit={handleQuiz} />}
+                        <FilterForm res={resP} submit={handleQuiz} />
                   </div>
                   <div className={`search-results-properties ${mapView ? 'active' : ''}`}>
                     {properties && properties.map((p, i) =>
@@ -316,7 +340,7 @@ const Search = () => {
                       setIsText={setIsTextSearch}
                       />
                   </div>}
-            </div>}
+            </motion.div>}
         </div>
     )
 }

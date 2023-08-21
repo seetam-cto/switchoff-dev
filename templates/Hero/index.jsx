@@ -11,7 +11,8 @@ export const logoState = atom(true)
 const Hero = () => {
   const [logo, setLogo] = useAtom(logoState)
   return (
-    <div className="hero" style={{backgroundImage: `url(${logo ? bg.src : expbg.src})`}}>
+    <div className="hero">
+        <img src={logo ? bg.src : expbg.src} className='hero-bg' />
         <div className="hero-overlay" />
         <div className="container">
             <div className="hero-searchbox">

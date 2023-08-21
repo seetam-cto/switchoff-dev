@@ -39,6 +39,11 @@
     box-sizing: border-box;
 }
 
+a{
+    text-decoration: none;
+    color: unset;
+}
+
 html {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -52,6 +57,12 @@ body {
     line-height: 1.5;
     background-color: $bg-body;
     overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+.section{
+    padding-block: 80px;
+    background-color: $white;
 }
 
 .container{
@@ -101,6 +112,14 @@ body {
         }
         &.ghost{
             border: none;
+            &-dark{
+                border: 1px solid $black;
+                color: $black;
+                &:hover{
+                    color: $white !important;
+                    background-color: $black;
+                }
+            }
             &:hover{
                 background-color: #00000030;
                 box-shadow: inset 0px 0px 5px #33333360;
@@ -112,6 +131,15 @@ body {
         &.primary{
             background-color: $white;
             color: $black;
+            &-dark{
+                background-color: $black;
+                color: $white;
+                border: 1px solid $black !important;
+                &:hover{
+                    background-color: $white;
+                    color: $black !important;
+                }
+            }
             &:hover{
                 background-color: #00000030;
                 backdrop-filter: blur( 4px );

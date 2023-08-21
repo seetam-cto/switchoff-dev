@@ -1,16 +1,5 @@
 @use '../abstracts/' as *;
 
-img.temp{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    pointer-events: none;}
-
 .hero{
     width: 100vw;
     height: 100vh;
@@ -22,6 +11,17 @@ img.temp{
     background-repeat: no-repeat;
     position: relative;
     transition: background-image 0.3s ease-in-out;
+    &-bg{
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        opacity: 1;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        pointer-events: none;
+    }
     &-searchbox{
         display: flex;
         align-items: center;
@@ -36,8 +36,8 @@ img.temp{
         z-index: 10;
     }
     &-overlay{
-        position: absolute;
-        z-index: 0;
+        position: fixed;
+        z-index: -1;
         width: 100%;
         height: 100%;
         top: 0;

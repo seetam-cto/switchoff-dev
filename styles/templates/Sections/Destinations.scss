@@ -1,0 +1,106 @@
+@use '../../abstracts/' as *;
+
+.destinations{
+    background-color: $white;
+    height: auto;
+    h2{
+        font-size: 3.5rem;
+        font-weight: 500;
+        font-family: $primary-font;
+    }
+    p{
+        font-size: 1rem;
+        font-family: $primary-font;
+        font-weight: 500;
+    }
+    &-cta{
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 1rem;
+    }
+    &-destination{
+        width: 100%;
+        box-sizing: border-box;
+        height: 300px;
+        position: relative;
+        &-grid{
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        &-bg{
+            width: 100%;
+            height: 300px;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        &-overlay{
+            position: absolute;
+            width: calc(100% - 30px);
+            margin-inline: 15px;
+            margin-top: -5px;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-image: linear-gradient(to bottom, #00000000, #00000030);
+            z-index: 1;
+            border-radius: 20px;
+        }
+        &-content{
+            position: absolute;
+            height: 100%;
+            width: calc(100% - 30px);
+            margin-inline: 15px;
+            margin-top: -5px;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            padding: 30px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-end;
+            cursor: pointer;
+            &:hover{
+                .destinations-destination-bg-img{
+                    transform: scale(1.2);
+                }
+            }
+            h4{
+                font-size: .9rem;
+                color: $white;
+                font-family: $primary-font;
+                font-weight: 500;
+            }
+            h2{
+                font-size: 2rem;
+                font-family: $primary-font;
+                font-weight: 500;
+                color: $white;
+            }
+            .tag{
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                padding:8px 18px;
+                border-radius: 40px;
+                background-color: #22222230;
+                backdrop-filter: blur( 4px );
+                -webkit-backdrop-filter: blur( 4px );
+                color: $white;
+
+            }
+        }
+    }
+}
