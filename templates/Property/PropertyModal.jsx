@@ -212,7 +212,7 @@ const PropertyModal = () => {
                                                             {am.text}
                                                         </div>
                                                     </div>
-                                                )}
+                                                )} 
                                             </div>
                                         </div>
                                         <div className="about">
