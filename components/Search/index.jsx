@@ -257,11 +257,12 @@ const Search = () => {
                       onChange={(value) => checkCommand(value)}
                       bordered={false}
                       backfill={true}
-                      autoFocus={true}
+                      autoFocus={false}
                       style={{height: 30}}
                       >
                       <input 
-                      onFocus={() => searchFocused()} 
+                      autoFocus={false}
+                      onFocus={() => searchFocused()}
                       onBlur={() => searchBlurred()}
                       autoComplete={true} className='search-input' />
                       </AutoComplete>

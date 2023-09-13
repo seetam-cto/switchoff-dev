@@ -8,6 +8,9 @@ import dynamic from 'next/dynamic';
 const DynamicModal = dynamic(() => import('@/templates/Property/PropertyModal'), { ssr: false });
 import { atom, useAtom } from 'jotai'
 import Destinations from '@/templates/Sections/Destinations'
+import SubscribeModal from '@/templates/Header/SubscribeModal'
+import { getHomePageContent } from '@/api/hygraph'
+import { BrowserView, MobileView} from 'react-device-detect'
 
 //global states
 export const propertyModalState = atom({
@@ -18,7 +21,7 @@ export const propertyModalState = atom({
 
 export const getPropetyModalState = atom((get) => get(propertyModalState))
 
-export default function Home() {
+export default function Home({data}) {
   return (
     <>
       <Head>
@@ -29,13 +32,32 @@ export default function Home() {
       </Head>
       <main>
         {/* <img src={herobg.src} className='temp' /> */}
+        <BrowserView>
         <AnimatePresence>
           <Header />
           <Hero />
-          <Destinations />
+          <div className="home-sections">
+            <Destinations data={data} />
+          </div>
           <DynamicModal />
+          <SubscribeModal />
         </AnimatePresence>
+        </BrowserView>
+        <MobileView>
+          <div>
+          <h2>This Website is in Test mode and Only available on Desktop Browsers.</h2>
+          </div>
+        </MobileView>
       </main>
     </>
   )
+}
+
+export const getStaticProps = async () => {
+  const homepage = await getHomePageContent()
+  return {
+    props: {
+      data: homepage
+    }
+  }
 }

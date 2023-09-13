@@ -1,135 +1,44 @@
 import { Button, Col, Row, Space } from 'antd'
+import Link from 'next/link'
 import React from 'react'
 
-const destinations = [
-  {
-    image: '/images/ooty.jpg',
-    category: 'EXPERIENCIAL STAYS IN',
-    name: 'Ooty, India',
-    tag: 'Experience'
-  },
-  {
-    image: '/images/ooty.jpg',
-    category: 'EXPERIENCIAL STAYS IN',
-    name: 'Ooty, India',
-    tag: 'Experience'
-  },
-  {
-    image: '/images/ooty.jpg',
-    category: 'EXPERIENCIAL STAYS IN',
-    name: 'Ooty, India',
-    tag: 'Experience'
-  },
-  {
-    image: '/images/ooty.jpg',
-    category: 'EXPERIENCIAL STAYS IN',
-    name: 'Ooty, India',
-    tag: 'Experience'
-  },
-  {
-    image: '/images/ooty.jpg',
-    category: 'EXPERIENCIAL STAYS IN',
-    name: 'Ooty, India',
-    tag: 'Experience'
-  }
-]
-
-const Destinations = () => {
+const Destinations = ({data}) => {
   return (
-    <section className='section destinations'>
+    <section id="destinations" className='section destinations'>
         <div className="container">
             <Row>
               <Col md={12} xs={24}>
-                <h2>A header for the destinations</h2>
+                <h2 dangerouslySetInnerHTML={{__html: data?.destinations?.heading}} />
               </Col>
               <Col md={12} xs={24}>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+                <p>{data?.destinations?.description}</p>
                 <div className="destinations-cta">
-                  <Button size='large' shape='round' className='so-button primary-dark'>Lets Explore</Button>
-                  <Button size='large' shape='round' className='so-button ghost-dark'>Read More</Button>
+                  <Link href={`/${data?.destinations?.link}`} size='large' shape='round' className='so-button primary-dark'>Lets Explore</Link>
+                  {/* <Button size='large' shape='round' className='so-button ghost-dark'>Read More</Button> */}
                 </div>
               </Col>
             </Row>
             <br />
+            <br />
             <div className="destinations-destination-grid">
-            <Row gutter={30}>
-              <Col md={16}>
-                <div className="destinations-desination">
-                <div className="destinations-destination-bg">
-                  <img className='destinations-destination-bg-img' src={destinations[0].image} />
-                </div>
-                  <div className="destinations-destination-overlay" />
-                  <div className="destinations-destination-content">
-                    <h4>{destinations[0].category}</h4>
-                    <h2>{destinations[0].name}</h2>
-                    <div className="tag">
-                      {destinations[0].tag}
-                    </div>
-                  </div> 
-                </div>
-              </Col>
-              <Col md={8}>
-              <div className="destinations-desination">
+            <Row gutter={[30,30]}>
+              {data?.destinations?.items.map((dest, i) => (
+                <Col md={i == 0 ? 16 : 8}>
+                  <div className="destinations-desination">
                   <div className="destinations-destination-bg">
-                    <img className='destinations-destination-bg-img' src={destinations[0].image} />
+                    <img className='destinations-destination-bg-img' src={dest.coverImage.url} />
                   </div>
-                  <div className="destinations-destination-overlay" />
-                  <div className="destinations-destination-content">
-                    <h4>{destinations[0].category}</h4>
-                    <h2>{destinations[0].name}</h2>
-                    <div className="tag">
-                      {destinations[0].tag}
-                    </div>
-                  </div> 
-                </div>
-              </Col>
-            </Row>
-            <Row gutter={30}>
-              <Col md={8}>
-                <div className="destinations-desination">
-                  <div className="destinations-destination-bg">
-                    <img className='destinations-destination-bg-img' src={destinations[0].image} />
+                    <div className="destinations-destination-overlay" />
+                    <div className="destinations-destination-content">
+                      <h4>{dest.subHeading}</h4>
+                      <h2>{dest.heading}</h2>
+                      <div className="tag">
+                        {dest.tag}
+                      </div>
+                    </div> 
                   </div>
-                  <div className="destinations-destination-overlay" />
-                  <div className="destinations-destination-content">
-                    <h4>{destinations[0].category}</h4>
-                    <h2>{destinations[0].name}</h2>
-                    <div className="tag">
-                      {destinations[0].tag}
-                    </div>
-                  </div> 
-                </div>
-              </Col>
-              <Col md={8}>
-                <div className="destinations-desination">
-                  <div className="destinations-destination-bg">
-                    <img className='destinations-destination-bg-img' src={destinations[0].image} />
-                  </div>
-                  <div className="destinations-destination-overlay" />
-                  <div className="destinations-destination-content">
-                    <h4>{destinations[0].category}</h4>
-                    <h2>{destinations[0].name}</h2>
-                    <div className="tag">
-                      {destinations[0].tag}
-                    </div>
-                  </div> 
-                </div>
-              </Col>
-              <Col md={8}>
-                <div className="destinations-desination">
-                  <div className="destinations-destination-bg">
-                    <img className='destinations-destination-bg-img' src={destinations[0].image} />
-                  </div>
-                  <div className="destinations-destination-overlay" />
-                  <div className="destinations-destination-content">
-                    <h4>{destinations[0].category}</h4>
-                    <h2>{destinations[0].name}</h2>
-                    <div className="tag">
-                      {destinations[0].tag}
-                    </div>
-                  </div> 
-                </div>
-              </Col>
+                </Col>
+              ))}
             </Row>
             </div>
         </div>

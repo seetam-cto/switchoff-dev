@@ -1,4 +1,4 @@
-import { Col, Collapse, Modal, Popover, Row, Skeleton, message } from 'antd'
+import { Col, Collapse, Modal, Popover, Row, Skeleton, message, DatePicker } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { propertyModalState } from '@/pages'
 import { useAtom } from 'jotai'
@@ -11,6 +11,9 @@ import {BsFillArrowLeftCircleFill, BsFillArrowRightCircleFill} from 'react-icons
 import { BsImages } from 'react-icons/bs'
 import { registerLead } from '@/api/server'
 import { CaretRightOutlined } from '@ant-design/icons'
+const { RangePicker } = DatePicker
+import dayjs from 'dayjs';
+import moment from 'moment'
 
 const PropertyModal = () => {
     const [propertyState, setPropertyState] = useAtom(propertyModalState)
@@ -19,10 +22,15 @@ const PropertyModal = () => {
     const [hotelData, setHotelData] = useState(null)
     const [galleryView, setGalleryView] = useState(false)
     const [price, setPrice] = useState('')
+    const [dates, setDates] = useState(null)
     const [userData, setUserData] = useState({
         name: '',
         phone: ''
     })
+    const disabledDate = (current) => {
+        // Can not select days before today and today
+        return current && current < dayjs().endOf('day');
+      };
     const [urlParams, setUrlParams] = useState({
         expediaPropertyId: propertyState.hotelId,
         tspid: '',
@@ -33,6 +41,18 @@ const PropertyModal = () => {
         numberOfAdults: '',
 
     })
+
+    const handleDates = async (vals) => {
+        setDates(vals)
+        if(vals !== null){
+          setSearchPs({
+            ...searchPs,
+            checkin_date: moment(new Date(vals[0])).format("YYYY-MM-DD"),
+            checkout_date: moment(new Date(vals[1])).format("YYYY-MM-DD")
+          })
+          await fetchHotelData()
+        }
+      }
 
     useEffect(() => {
         setUrlParams({...urlParams,
@@ -204,6 +224,17 @@ const PropertyModal = () => {
                                     <img className='mapimage' map src={hotelData?.info?.hotelData?.summary?.location?.staticImage?.url} />
                                 </Col>
                             </Row>
+                        </div>
+                    </div>
+                    <div className="property-datepicker">
+                        <h2>Select Your Dates</h2>
+                        <div className="property-datepicker-dates">
+                        <RangePicker
+                    value={dates}
+                    placeholder={['Check In','Check Out']}
+                    onChange={(val) => handleDates(val)}
+                    disabledDate={disabledDate}
+                    clearIcon={false} suffixIcon={null} size='large' className='search-dates-inputs' bordered={false} />
                         </div>
                     </div>
                     <div className="property-info-offers">

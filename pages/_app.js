@@ -2,6 +2,7 @@ import '../styles/App.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-phone-input-2/lib/style.css'
 import { ConfigProvider } from 'antd';
 
 export default function App({ Component, pageProps }) {
