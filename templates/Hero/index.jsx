@@ -19,11 +19,19 @@ const Hero = () => {
                 <Search />
             </div>
             <div className={`hero-headings ${logo ? 'darkbg' : 'lightbg'}`}>
-              <h1>{logo ? 'Luxury' : 'Experiential'} Stays Redefined</h1>
-              <h2>Book Your Dream Stay with <span>AI-Enabled</span> Simplicity</h2>
+              <h1>
+                {/* {logo ? 'Luxury' : 'Experiential'} */}
+                SwitchOff</h1>
+              <h2>redefining the way, you search and stay</h2>
             </div>
             <div className="hero-quicks">
-              
+              <div className="beta-box">
+                <h2>🚀 Welcome to Our Beta Testing Phase 🚀</h2>
+                <p>We're thrilled to have you here as we embark on an exciting journey of innovation and improvement!</p>
+                <h3>👷‍♂️ Currently, Our Website is Under Development 👷‍♀️</h3>
+                <p>This means we're hard at work crafting an amazing online experience for you. Stay tuned for a sneak peek of what's coming and be part of our journey as we refine and enhance every aspect of our platform.</p>
+                <p>Thank you for your patience and support as we strive to deliver excellence!</p>
+              </div>
             </div>
             <div className="hero-info">
               <div className='hero-info-sub'>

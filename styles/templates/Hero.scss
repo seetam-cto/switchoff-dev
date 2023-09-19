@@ -4,7 +4,8 @@
     width: 100vw;
     height: 100vh;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
+    padding-top: 20vh;
     justify-content: center;
     background-size: cover;
     background-position: center;
@@ -90,14 +91,14 @@
     &-headings{
         width: 100%;
         text-align: center;
-        margin-bottom: 40vh;
+        margin-bottom: 30vh;
         z-index: 5;
         position: relative;
         &.lightbg{
             text-shadow: 2px 2px 35px #0000009a;
         }
         h1{
-            font-family: $heading-font;
+            font-family: $primary-font;
             font-size: 3rem;
             color: $white;
             transition: all .3s ease-in-out;
@@ -122,4 +123,16 @@
         height: 10vh;
         margin-block: 5vh;
     }
+}
+
+.beta-box{
+    width: 70%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-inline: auto;
+    background-color: #FFFFFF80;
+    padding: 20px;
+    border-radius: 15px;
 }
