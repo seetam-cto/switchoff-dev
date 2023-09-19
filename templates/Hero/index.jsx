@@ -28,9 +28,9 @@ const Hero = () => {
               <div className="beta-box">
                 <h2>🚀 Welcome to Our Beta Testing Phase 🚀</h2>
                 <p>We're thrilled to have you here as we embark on an exciting journey of innovation and improvement!</p>
-                <h3>👷‍♂️ Currently, Our Website is Under Development 👷‍♀️</h3>
-                <p>This means we're hard at work crafting an amazing online experience for you. Stay tuned for a sneak peek of what's coming and be part of our journey as we refine and enhance every aspect of our platform.</p>
-                <p>Thank you for your patience and support as we strive to deliver excellence!</p>
+                <h3>🤖 Currently, Our AI is in Training Mode 🤖</h3>
+                <p>Our team is hard at work training our AI to provide you with an extraordinary experience. During this phase, you'll witness the magic of AI as it becomes even more capable, making your journey with us seamless and efficient.</p>
+                <p>Thank you for joining us on this AI-powered adventure!</p>
               </div>
             </div>
             <div className="hero-info">
