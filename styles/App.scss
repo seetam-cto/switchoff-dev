@@ -3,10 +3,12 @@
 
 /** Pages **/
 @forward './pages/Home.scss';
+@forward './pages/TC.scss';
 
 /** Templates **/
 @forward './templates/Hero.scss';
 @forward './templates/Header.scss';
+@forward './templates/Footer.scss';
 @forward './templates/Sections/Destinations.scss';
 @forward './templates/Property.scss';
 

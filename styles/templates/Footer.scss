@@ -1,0 +1,35 @@
+@use '../abstracts/' as *;
+
+.footer{
+    width: 100vw;
+    min-height: 200px;
+    background-color: $black;
+    padding-block: 50px;
+    color: $white;
+    font-family: $primary-font;
+    &-address{
+        h2{
+            font-size: 1rem;
+        }
+        ul{
+            display: flex;
+            list-style: none;
+            padding: 0;
+            gap: 10px;
+            margin-top: 10px;
+        }
+    }
+    h4{
+        margin-top: 10px;
+        font-size: 1rem;
+    }
+    ul{
+        list-style: none;
+        padding: 0;
+        margin-top: 10px;
+        li{
+            font-size: .8rem;
+        }
+    }
+}
+

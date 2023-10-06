@@ -1,0 +1,12 @@
+@use '../abstracts/' as *;
+
+.tc{
+    &-main{
+        background-color: $black;
+    }
+    background-color: $black;
+    color: $white;
+    h3{
+        margin-top: 20px;
+    }
+}

@@ -177,3 +177,21 @@ body {
         height: 100% !important;
     }
 }
+
+.privacy-policy{
+    padding-block: 15vh;
+    background-color: $black;
+    color: $white;
+    h2{
+        margin-top: 20px;
+    }
+    ul{
+        padding: unset !important;
+        margin-left: 20px;
+        margin-bottom: 20px;
+    }
+    li{
+        padding: unset;
+    }
+}
+
